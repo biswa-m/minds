@@ -1,15 +1,13 @@
-Minds
+Fansonly
 =====
-Minds is an open-source, encrypted and reward-based social networking platform. https://minds.com
 
 ## Repositories
 
 Minds is split into multiple repositories:
 
-- [Engine](https://gitlab.com/minds/engine) - Backend code & APIs
-- [Front](https://gitlab.com/minds/front) - Client side Angular2 web app
-- [Sockets](https://gitlab.com/minds/sockets) - WebSocket server for real-time communication
-- [Mobile](https://gitlab.com/minds/mobile-native) - React Native mobile apps
+- [Engine]- Backend code & APIs
+- [Front] - Client side Angular2 web app
+- [Sockets] - WebSocket server for real-time communication
 
 
 ## Development System Requirements
@@ -37,15 +35,19 @@ To make it permanent, modify the variable in /etc/sysctl.conf
 2. Run the legacy provisioner: `docker-compose up elasticsearch-legacy-provisioner`
 3. Run the legacy provisioner: `docker-compose up elasticsearch-provisioner`
 
-### Running the stack the first time
+### Running the stack
+
+aws s3 bucket name is hard-coded, find and replace aws s3 bucket name if needed.
 
 1. Run `sh init.sh` in order to install the front and engine repositories
 2. Run `docker-compose up -d nginx`
 3. Run `docker-compose up installer` (one time only.. initial username: minds / password: Pa$$w0rd)
-4. Run `docker-compose up front-build` 
-5. Navigate to `http://localhost:8080`
-6. Run `docker-compose up sync-engine`to sync engine
-7. Run `docker-compose up sync-front` 
+4. Check engine/settings.php if somekeys are missing update manually from engine/settings.example.php. (search for TODO at settings.example.php) 
+5. if settings.php is changed manually repeat step 2 and 3.
+6. Run `docker-compose up sockets`
+7. Run `docker-compose up runners`
+8. Run `docker-compose exec php-fpm php /var/www/Minds/engine/cli.php QueueRunner run --runner=Transcode` Transcode queue runner manually. 
+9. cd front and Run `docker-compose up front-build` 
 
 # Troubleshooting
 
