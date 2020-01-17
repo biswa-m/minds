@@ -190,7 +190,7 @@ services:
       - PORT=3030
       - REDIS_HOST=redis
       - REDIS_PORT=6379
-      - JWT_SECRET=<!!! set this to jwt-token in your engine/settings.php !!!>
+      - JWT_SECRET=e07b25bca6f52087b4af6402edb2c8a9e37e984314bb6dabc80c008850b64e90c5bb6cbbb8f9f151ffd4872bc2fb6961dc5dfa9fcd8bcb70a73c0a72fdff87cb
       - CASSANDRA_SERVERS=cassandra
       - CASSANDRA_KEYSPACE=minds
     networks:
